@@ -15,11 +15,11 @@ class TestDevelopmentConfig(TestCase):
         return app
 
     def test_app_is_development(self):
-        self.assertFalse(app.config['SECRET_KEY'] is 'my_precious')
-        self.assertTrue(app.config['DEBUG'] is True)
-        self.assertFalse(current_app is None)
+        self.assertFalse(app.config['SECRET_KEY'] == 'my_precious')
+        self.assertTrue(app.config['DEBUG'] == True)
+        self.assertFalse(current_app == None)
         self.assertTrue(
-            app.config['SQLALCHEMY_DATABASE_URI'] == 'postgresql://postgres:@localhost/flask_jwt_auth'
+            app.config['SQLALCHEMY_DATABASE_URI'] == 'mariadb+mariadbconnector://root@localhost:3306/flask_jwt_auth'
         )
 
 
@@ -29,10 +29,10 @@ class TestTestingConfig(TestCase):
         return app
 
     def test_app_is_testing(self):
-        self.assertFalse(app.config['SECRET_KEY'] is 'my_precious')
+        self.assertFalse(app.config['SECRET_KEY'] == 'my_precious')
         self.assertTrue(app.config['DEBUG'])
         self.assertTrue(
-            app.config['SQLALCHEMY_DATABASE_URI'] == 'postgresql://postgres:@localhost/flask_jwt_auth_test'
+            app.config['SQLALCHEMY_DATABASE_URI'] == 'mariadb+mariadbconnector://root@localhost:3306/flask_jwt_auth_test'
         )
 
 
@@ -42,7 +42,7 @@ class TestProductionConfig(TestCase):
         return app
 
     def test_app_is_production(self):
-        self.assertTrue(app.config['DEBUG'] is False)
+        self.assertTrue(app.config['DEBUG'] == False)
 
 
 if __name__ == '__main__':
